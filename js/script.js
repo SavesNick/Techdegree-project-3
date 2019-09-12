@@ -16,8 +16,16 @@ $("#title").on('click' , function(event){
 //Until a theme is selected from the “Design” menu, no color options appear in the
 //“Color” drop down and the “Color” field reads “Please select a T-shirt theme”
 
-$("").select(function(){
-    $("").change();
+$("#design").change(function(event){
+    if($(event).val() === "js puns"){
+
+
+
+
+
+    };
+    if($(event).val() === "heart js ")
+
 });
 
 
