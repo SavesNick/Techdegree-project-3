@@ -24,7 +24,10 @@ $("#design").change(function(event){
 
 
     };
-    if($(event).val() === "heart js ")
+    if($(event).val() === "heart js "){
+
+
+    };
 
 });
 
