@@ -15,9 +15,11 @@ $("#title").on('click' , function(event){
 
 //Until a theme is selected from the “Design” menu, no color options appear in the
 //“Color” drop down and the “Color” field reads “Please select a T-shirt theme”
+//When a new theme is selected from the "Design" menu, the "Color" field and drop
+//down menu is updated
 
 $("#design").change(function(event){
-    if($("#design option:selected").text() === "Theme - js puns"){
+    if($("#design option:selected").text()==="Theme - JS puns"){
 $("#color").val("cornflowerblue").show();
 $("#color option[value='cornflowerblue']").show();
 $("#color option[value='gold']").show()
@@ -34,18 +36,11 @@ $("#color option[value='steelblue']").hide();
         $("#color option[value='tomato']").show();
         $("#color option[value='dimgrey']").show();
         $("#color option[value='steelblue']").show();
-        
+
 }else if($('#design').val() === "Select Themes"){
     $("#colors-js-puns").hide()
 };
 
-});
-
-
-//When a new theme is selected from the "Design" menu, the "Color" field and drop
-//down menu is updated
-$("").select(function(){
-    $("").change();
 });
 
 
