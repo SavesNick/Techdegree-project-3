@@ -17,17 +17,27 @@ $("#title").on('click' , function(event){
 //“Color” drop down and the “Color” field reads “Please select a T-shirt theme”
 
 $("#design").change(function(event){
-    if($(event).val() === "js puns"){
+    if($("#design option:selected").text() === "Theme - js puns"){
+$("#color").val("cornflowerblue").show();
+$("#color option[value='cornflowerblue']").show();
+$("#color option[value='gold']").show()
+$("#color option[value='darkslategrey']").show();
+$("#color option[value='tomato']").hide();
+$("#color option[value='dimgrey']").hide();
+$("#color option[value='steelblue']").hide();
 
-
-
-
-
-    };
-    if($(event).val() === "heart js "){
-
-
-    };
+    } else if($("#design option:selected").text() === "Theme - I &#9829 JS"){
+        $("#color").val("cornflowerblue").hide();
+        $("#color option[value='cornflowerblue']").hide();
+        $("#color option[value='gold']").hide()
+        $("#color option[value='darkslategrey']").hide();
+        $("#color option[value='tomato']").show();
+        $("#color option[value='dimgrey']").show();
+        $("#color option[value='steelblue']").show();
+        
+}else if($('#design').val() === "Select Themes"){
+    $("#colors-js-puns").hide()
+};
 
 });
 
