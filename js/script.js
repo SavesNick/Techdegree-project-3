@@ -19,7 +19,12 @@ $("#title").on('click' , function(event){
 //down menu is updated
 
 $("#design").change(function(event){
-    if($("#design option:selected").text()==="Theme - JS puns"){
+
+  
+    if($('#design').val() === "Select Theme"){
+        $("#colors-js-puns").hide()
+
+    } else if($("#design option:selected").text()==="Theme - JS Puns"){
 $("#color").val("cornflowerblue").show();
 $("#color option[value='cornflowerblue']").show();
 $("#color option[value='gold']").show()
@@ -28,17 +33,15 @@ $("#color option[value='tomato']").hide();
 $("#color option[value='dimgrey']").hide();
 $("#color option[value='steelblue']").hide();
 
-    } else if($("#design option:selected").text() === "Theme - I &#9829 JS"){
-        $("#color").val("cornflowerblue").hide();
-        $("#color option[value='cornflowerblue']").hide();
-        $("#color option[value='gold']").hide()
-        $("#color option[value='darkslategrey']").hide();
+   }else if($("#design option:selected").text() === "Theme - I ♥ JS"){
+        $("#color").val("tomato").show();
         $("#color option[value='tomato']").show();
         $("#color option[value='dimgrey']").show();
         $("#color option[value='steelblue']").show();
-
-}else if($('#design').val() === "Select Themes"){
-    $("#colors-js-puns").hide()
+        $("#color option[value='cornflowerblue']").hide();
+        $("#color option[value='gold']").hide()
+        $("#color option[value='darkslategrey']").hide();
+        
 };
 
 });
