@@ -2,10 +2,10 @@
 $("#name").focus()
 
 //"Your job role" text field appears when user selects "Other" from the Job Role menu
-<<<<<<< HEAD
+
 $("#other-role").hide().click(function(){
     $("#other-role").show();
-=======
+
 $("#other-role").hide()
 $("#title").on('click' , function(event){
     if(event.target.value === "other"){
@@ -14,8 +14,8 @@ $("#title").on('click' , function(event){
 
     }else{
         $("#other-role").hide()
-    }
->>>>>>> 9f1d0c2713743afdb803c1b8675a01620cb3d934
+    };
+
 });
 
 //Until a theme is selected from the “Design” menu, no color options appear in the
@@ -81,26 +81,27 @@ $('input[name = "express"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
     };
-    
-    });
+});
+
 // for js-libs
 $('input[name = "js-libs"]').on('click' , function(){
 
     if($(this).is(':checked')){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
+
     };
-    
-    });
+});
+
 // for node
 $('input[name = "node"]').on('click' , function(){
 
     if($(this).is(':checked')){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
+
     };
-    
-    });
+});
 // for build tools
 $('input[name = "build-tools"]').on('click' , function(){
 
