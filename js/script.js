@@ -5,11 +5,11 @@ $("#name").focus()
 
 $("#other-role").hide().click(function(){
     $("#other-role").show();
-
+});
 $("#other-role").hide()
 $("#title").on('click' , function(event){
     if(event.target.value === "other"){
-        
+    
     $("#other-role").show();
 
     }else{
@@ -17,6 +17,7 @@ $("#title").on('click' , function(event){
     };
 
 });
+
 
 //Until a theme is selected from the “Design” menu, no color options appear in the
 //“Color” drop down and the “Color” field reads “Please select a T-shirt theme”
