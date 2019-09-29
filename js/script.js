@@ -3,7 +3,7 @@ $("#name").focus()
 
 //"Your job role" text field appears when user selects "Other" from the Job Role menu
 $("#other-role").hide().click(function(){
-    $("#other-role").show;
+    $("#other-role").show();
 });
 
 //Until a theme is selected from the “Design” menu, no color options appear in the
