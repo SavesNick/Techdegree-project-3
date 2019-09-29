@@ -45,9 +45,66 @@ $("#color option[value='steelblue']").hide();
 };
 
 });
+// Register Activities Section: User cannot select two activities that are at the same time
+const totalValue = 0
+$('.activities').append('<p></p>')
 
+//for js-frameworks
+$('input[name = "js-frameworks"]').on('click' , function(){
 
-//User cannot select two activities that are at the same time
+if($(this).is(':checked')){
+    totalValue = totalValue + 100;
+    $('.activities p').text("Total: $ " + totalValue);
+};
+
+});
+// prevent double booking between events
+
+// for express
+$('input[name = "express"]').on('click' , function(){
+
+    if($(this).is(':checked')){
+        totalValue = totalValue + 100;
+        $('.activities p').text("Total: $ " + totalValue);
+    };
+    
+    });
+// for js-libs
+$('input[name = "js-libs"]').on('click' , function(){
+
+    if($(this).is(':checked')){
+        totalValue = totalValue + 100;
+        $('.activities p').text("Total: $ " + totalValue);
+    };
+    
+    });
+// for node
+$('input[name = "node"]').on('click' , function(){
+
+    if($(this).is(':checked')){
+        totalValue = totalValue + 100;
+        $('.activities p').text("Total: $ " + totalValue);
+    };
+    
+    });
+// for build tools
+$('input[name = "build-tools"]').on('click' , function(){
+
+    if($(this).is(':checked')){
+        totalValue = totalValue + 100;
+        $('.activities p').text("Total: $ " + totalValue);
+    };
+    
+    });
+    // for npm
+    $('input[name = "npm"]').on('click' , function(){
+
+        if($(this).is(':checked')){
+            totalValue = totalValue + 100;
+            $('.activities p').text("Total: $ " + totalValue);
+        };
+        
+        });
 
 //Validate required fields and provide error indications for invalid fields upon form
 //submission
