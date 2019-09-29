@@ -55,10 +55,19 @@ $('input[name = "js-frameworks"]').on('click' , function(){
 if($(this).is(':checked')){
     totalValue = totalValue + 100;
     $('.activities p').text("Total: $ " + totalValue);
+
+    //prevent double booking between js-frameworks and express
+$('[name= "express"]').attr('disabled' , true).parent().fadeout("slow")
+
+}else{
+
+totalValue = totalValue - 100
+    $('.activities p').text("Total: $ " + totalValue)
+        $('[name = "express"]').removeAttr('disabled').parent().toggle()
 };
 
 });
-// prevent double booking between events
+
 
 // for express
 $('input[name = "express"]').on('click' , function(){
