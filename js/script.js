@@ -81,6 +81,15 @@ $('input[name = "express"]').on('click' , function(){
     if($(this).is(':checked')){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
+
+        $("[name = 'js-frameworks']").attr('disabled' , "true").parent().fadeout("slow")
+
+    }else{
+
+        totalValue = totalValue - 100;
+        $('.activities p').text("Total: $ " + totalValue)
+
+        $("[name = 'js-frameworks']").removeAttr('disabled').parent().toggle()
     };
 });
 
@@ -90,8 +99,17 @@ $('input[name = "js-libs"]').on('click' , function(){
     if($(this).is(':checked')){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
+// prevent double booking between js-libs and node
+        $("[name = 'node']").attr('disabled' , "true").parent().fadeout("slow")
 
+    }else{
+
+        totalValue = totalValue - 100;
+        $('.activities p').text("Total: $ " + totalValue)
+
+        $("[name = 'node']").removeAttr('disabled').parent().toggle()
     };
+
 });
 
 // for node
@@ -101,7 +119,17 @@ $('input[name = "node"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 
+
+        $("[name = 'js-libs']").attr('disabled' , "true").parent().fadeout("slow")
+
+    }else{
+
+        totalValue = totalValue - 100;
+        $('.activities p').text("Total: $ " + totalValue)
+
+        $("[name = 'js-libs']").removeAttr('disabled').parent().toggle()
     };
+    
 });
 // for build tools
 $('input[name = "build-tools"]').on('click' , function(){
@@ -109,6 +137,10 @@ $('input[name = "build-tools"]').on('click' , function(){
     if($(this).is(':checked')){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
+    }else{
+
+        totalValue = totalValue - 100
+        $('activities p').text("Total: $ " + totalValue)
     };
     
     });
@@ -118,9 +150,24 @@ $('input[name = "build-tools"]').on('click' , function(){
         if($(this).is(':checked')){
             totalValue = totalValue + 100;
             $('.activities p').text("Total: $ " + totalValue);
+        }else{
+            totalValue = totalValue - 100
+            $('activities p').text("Total: $ " + totalValue)
+
         };
         
         });
+    $('input[name = "all"]').on('click' , function(){
 
+            if($(this).is(':checked')){
+                totalValue = totalValue + 100;
+                $('.activities p').text("Total: $ " + totalValue);
+            }else{
+                totalValue = totalValue - 100
+                $('activities p').text("Total: $ " + totalValue)
+    
+            };
+            
+            });
 //Validate required fields and provide error indications for invalid fields upon form
 //submission
