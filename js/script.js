@@ -63,7 +63,7 @@ if($(this).is(':checked')){
     $('.activities p').text("Total: $ " + totalValue);
 
     //prevent double booking between js-frameworks and express
-$('[name= "express"]').attr('disabled' , true).parent().fadeout("slow")
+$('[name= "express"]').attr('disabled' , "true").parent().fadeOut("slow")
 
 }else{
 
@@ -82,7 +82,7 @@ $('input[name = "express"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 
-        $("[name = 'js-frameworks']").attr('disabled' , "true").parent().fadeout("slow")
+        $("[name = 'js-frameworks']").attr('disabled' , "true").parent().fadeOut("slow")
 
     }else{
 
@@ -100,7 +100,7 @@ $('input[name = "js-libs"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 // prevent double booking between js-libs and node
-        $("[name = 'node']").attr('disabled' , "true").parent().fadeout("slow")
+        $("[name = 'node']").attr('disabled' , "true").parent().fadeOut("slow")
 
     }else{
 
@@ -120,7 +120,7 @@ $('input[name = "node"]').on('click' , function(){
         $('.activities p').text("Total: $ " + totalValue);
 
 
-        $("[name = 'js-libs']").attr('disabled' , "true").parent().fadeout("slow")
+        $("[name = 'js-libs']").attr('disabled' , "true").parent().fadeOut("slow")
 
     }else{
 
@@ -169,5 +169,46 @@ $('input[name = "build-tools"]').on('click' , function(){
             };
             
             });
+
+
+//payment information section            
+$("#payment").val("credit card").show();
+$(".paypal").focus();
+
+
+// hide senesitve banking information for paypal and bitcoin
+
+$("paypal").hide();
+$("bitcoin").hide();
+
+
+$('#payment').change(function(){
+
+if($('#payment option:selected').text()==='PayPal') {
+$('.paypal').toggle(1000);
+$('.bitcoin').hide();
+$('#credit-card').hide(); 
+
+
+}else if ($('#payment option:selected').text()==='Credit Card') {
+    $('.paypal').hide();
+    $('.bitcoin').hide();
+    $('#credit-card').toggle(2000);
+
+
+
+}else if ($('#payment option:selected').text()==='Bitcoin') {
+    $('.paypal').hide();
+    $('.bitcoin').toggle(1000);
+    $('#credit-card').hide();
+}else if ($('#payment option:selected').text()==="Select Payment Method"){
+
+$('#payment').val("credit card").show()
+$('.selectMethod').fadeOut()
+};
+
+
+});
 //Validate required fields and provide error indications for invalid fields upon form
 //submission
+
