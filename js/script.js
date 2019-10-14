@@ -63,7 +63,7 @@ if($(this).is(':checked')){
     $('.activities p').text("Total: $ " + totalValue);
 
     //prevent double booking between js-frameworks and express
-$('[name= "express"]').attr('disabled' , "true").parent().fadeOut("slow")
+$('[name= "express"]').attr("disabled" , "true").parent().fadeOut()
 
 }else{
 
@@ -82,7 +82,7 @@ $('input[name = "express"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 
-        $("[name = 'js-frameworks']").attr('disabled' , "true").parent().fadeOut("slow")
+        $("[name = 'js-frameworks']").attr("disabled" , "true").parent().fadeOut("slow")
 
     }else{
 
@@ -100,7 +100,7 @@ $('input[name = "js-libs"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 // prevent double booking between js-libs and node
-        $("[name = 'node']").attr('disabled' , "true").parent().fadeOut("slow")
+        $("[name = 'node']").attr("disabled" , "true").parent().fadeOut()
 
     }else{
 
@@ -120,7 +120,7 @@ $('input[name = "node"]').on('click' , function(){
         $('.activities p').text("Total: $ " + totalValue);
 
 
-        $("[name = 'js-libs']").attr('disabled' , "true").parent().fadeOut("slow")
+        $("[name = 'js-libs']").attr("disabled" , "true").parent().fadeOut()
 
     }else{
 
@@ -206,9 +206,134 @@ $('#credit-card').hide();
 $('#payment').val("credit card").show()
 $('.selectMethod').fadeOut()
 };
-
-
 });
+
 //Validate required fields and provide error indications for invalid fields upon form
 //submission
+//for name 
+$('form').submit(function(event){
+
+if($('input:first').val()===""){
+
+    alert('You Shall Not Pass... Without a name.')
+    return false
+};
+});
+//for email
+$('form').submit(function(event){
+
+    if($('input[name = "user_email"]').val()===""){
+    
+        alert('You Shall Not Pass... Without an email.')
+        return false
+    };
+    });
+
+//regex for email so email input is valid.
+
+let emailInput = document.getElementById('email')
+
+function validEmail(email){
+
+return /^[^@]+@+\.[a-z]+$/i.test(email);
+};
+
+function tip(show, element){
+
+if(show){
+element.style.display = "incorprate"
+}else{
+    element.style.display = "none"
+};
+};
+
+function eventListener(validity){
+return event => {
+const valid = validity(text)
+const text = event.target.nextElementSibilings;
+const showadvice = text !== '' && !valid;
+const tool = event.target.nextElementSibilings;
+tip(showadvice , tool);
+};
+};
+
+emailInput.addEventListener("input" , createListener(validEmail))
+
+$(document).submit(function(event){
+if($('#checkBoxes input[tpye="checkbox"]:checked').length !== 0){
+alert("Good Choice!");    
+}else{
+    alert("Please register for atleast one event.")
+    return false 
+};
+});
+//credit card feild.
+
+$('form').submit(function(event){
+if($('input[name="user_cc-num"]').val()===''){
+
+    alert('No credit card? No event.')
+}
+return false
+});
+
+$('form').submit(function(event){
+    let cc = document.getElementById('cc-num').value;
+if(isNaN(cc) || cc === ""){
+alert('Debit or credit card information is required to purchase the event chosen');
+return false;
+}else if(cc.length > 0 && cc.length < 13){
+    alert('CC Number can not have less than 13 digits!')
+return false;
+}else if(cc.length>16){
+alert('Credit card number can not have more than 16 digits!')
+return false;
+};
+});
+// the CVV mumber
+$('form').submit(function(event){
+    if($('input[name="user_cvv"]').val()===''){
+    
+        alert('No cvv? No event.')
+    };
+    return false
+    });
+    
+    $('form').submit(function(event){
+        let cvv = document.getElementById('cvv').value;
+    if(isNaN(cvv) || cc === ""){
+    alert('Debit or credit card information is required to purchase the event chosen');
+    return false;
+    }else if(cvv.length > 0 && cvv.length < 3){
+        alert('cvv Number can not have less than 3 digits!')
+    return false;
+    }else if(cvv.length>3){
+    alert('cvv number can not have more than 3 digits!')
+    return false;
+    };
+    });
+
+//zip code
+$('form').submit(function(event){
+
+        if($('input[name="user_zip"]').val()===''){
+        
+            alert('No Zip Code? No event.')
+        };
+        return false
+        });
+        
+        $('form').submit(function(event){
+            let zip = document.getElementById('zip').value;
+        if(isNaN(zip) || zip === ""){
+        alert('Zip code information is required for this feild.');
+        return false;
+        }else if(zip.length > 0 && zip.length < 5){
+            alert('Zip code can not have less than 5 digits!')
+        return false;
+        }else if(zip.length>5){
+        alert('Zip code can not have more than 5 digits!')
+        return false;
+        };
+        });
 
