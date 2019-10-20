@@ -23,14 +23,11 @@ $("#title").on('click' , function(event){
 //“Color” drop down and the “Color” field reads “Please select a T-shirt theme”
 //When a new theme is selected from the "Design" menu, the "Color" field and drop
 //down menu is updated
+//$("#colors-js-puns").hide()
+$("#design").change(function(){
 
-$("#design").change(function(event){
+if($("#design option:selected").text()==="Theme - JS Puns"){
 
-  
-    if($('#design').val() === "Select Theme"){
-        $("#colors-js-puns").hide()
-
-    } else if($("#design option:selected").text()==="Theme - JS Puns"){
 $("#color").val("cornflowerblue").show();
 $("#color option[value='cornflowerblue']").show();
 $("#color option[value='gold']").show()
@@ -38,6 +35,9 @@ $("#color option[value='darkslategrey']").show();
 $("#color option[value='tomato']").hide();
 $("#color option[value='dimgrey']").hide();
 $("#color option[value='steelblue']").hide();
+
+   }else if($('#design').text() === "Select Theme"){
+    $("#colors-js-puns").hide();
 
    }else if($("#design option:selected").text() === "Theme - I ♥ JS"){
         $("#color").val("tomato").show();
@@ -52,7 +52,7 @@ $("#color option[value='steelblue']").hide();
 
 });
 // Register Activities Section: User cannot select two activities that are at the same time
-const totalValue = 0
+let totalValue = 0
 $('.activities').append('<p></p>')
 
 //for js-frameworks
@@ -64,6 +64,7 @@ if($(this).is(':checked')){
 
     //prevent double booking between js-frameworks and express
 $('[name= "express"]').attr("disabled" , "true").parent().fadeOut()
+
 
 }else{
 
@@ -82,14 +83,16 @@ $('input[name = "express"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 
-        $("[name = 'js-frameworks']").attr("disabled" , "true").parent().fadeOut("slow")
+        $("[name = 'js-frameworks']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'build-tools']").attr("disabled" , "true").parent().fadeOut();
 
     }else{
 
         totalValue = totalValue - 100;
         $('.activities p').text("Total: $ " + totalValue)
 
-        $("[name = 'js-frameworks']").removeAttr('disabled').parent().toggle()
+        $("[name = 'js-frameworks']").removeAttr('disabled').parent().toggle();
+        $('[name = "build-tools"]').removeAttr('disabled').parent().toggle()
     };
 });
 
@@ -100,14 +103,16 @@ $('input[name = "js-libs"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 // prevent double booking between js-libs and node
-        $("[name = 'node']").attr("disabled" , "true").parent().fadeOut()
+        $("[name = 'node']").attr("disabled" , "true").parent().fadeOut();
+        
 
     }else{
 
         totalValue = totalValue - 100;
         $('.activities p').text("Total: $ " + totalValue)
 
-        $("[name = 'node']").removeAttr('disabled').parent().toggle()
+        $("[name = 'node']").removeAttr('disabled').parent().toggle();
+        
     };
 
 });
@@ -143,7 +148,7 @@ $('input[name = "build-tools"]').on('click' , function(){
         $('activities p').text("Total: $ " + totalValue)
     };
     
-    });
+});
     // for npm
     $('input[name = "npm"]').on('click' , function(){
 
@@ -156,15 +161,30 @@ $('input[name = "build-tools"]').on('click' , function(){
 
         };
         
-        });
+    });
+        //for all
     $('input[name = "all"]').on('click' , function(){
 
             if($(this).is(':checked')){
-                totalValue = totalValue + 100;
+                totalValue = totalValue + 200;
                 $('.activities p').text("Total: $ " + totalValue);
+//hides everything else
+        $("[name = 'js-frameworks']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'build-tools']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'express']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'js-libs']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'node']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'npm']").attr("disabled" , "true").parent().fadeOut();
             }else{
-                totalValue = totalValue - 100
+                totalValue = totalValue - 200
                 $('activities p').text("Total: $ " + totalValue)
+//hides everything else
+        $("[name = 'js-frameworks']").removeAttr('disabled').parent().toggle();
+        $('[name = "build-tools"]').removeAttr('disabled').parent().toggle()
+        $("[name = 'express']").removeAttr('disabled').parent().toggle();
+        $('[name = "js-libs"]').removeAttr('disabled').parent().toggle()
+        $("[name = 'node']").removeAttr('disabled').parent().toggle();
+        $('[name = "npm"]').removeAttr('disabled').parent().toggle()
     
             };
             
@@ -185,22 +205,23 @@ $("bitcoin").hide();
 $('#payment').change(function(){
 
 if($('#payment option:selected').text()==='PayPal') {
-$('.paypal').toggle(1000);
-$('.bitcoin').hide();
-$('#credit-card').hide(); 
+    $('.paypal').slideToggle(2000);
+    $('.bitcoin').hide();
+    $('#credit-card').hide(); 
 
 
 }else if ($('#payment option:selected').text()==='Credit Card') {
     $('.paypal').hide();
     $('.bitcoin').hide();
-    $('#credit-card').toggle(2000);
+    $('#credit-card').slideToggle(2000);
 
 
 
 }else if ($('#payment option:selected').text()==='Bitcoin') {
     $('.paypal').hide();
-    $('.bitcoin').toggle(1000);
+    $('.bitcoin').slideToggle(1000);
     $('#credit-card').hide();
+    
 }else if ($('#payment option:selected').text()==="Select Payment Method"){
 
 $('#payment').val("credit card").show()
@@ -222,7 +243,7 @@ if($('input:first').val()===""){
 //for email
 $('form').submit(function(event){
 
-    if($('input[name = "user_email"]').val()===""){
+    if($('input[name = "user_email"]').val()=== ''){
     
         alert('You Shall Not Pass... Without an email.')
         return false
@@ -241,9 +262,9 @@ return /^[^@]+@+\.[a-z]+$/i.test(email);
 function tip(show, element){
 
 if(show){
-element.style.display = "incorprate"
+element.style.display = "inherit"
 }else{
-    element.style.display = "none"
+element.style.display = "none"
 };
 };
 
@@ -257,7 +278,7 @@ tip(showadvice , tool);
 };
 };
 
-emailInput.addEventListener("input" , createListener(validEmail))
+emailInput.addEventListener("input" , createListener(validEmail));
 
 $(document).submit(function(event){
 if($('#checkBoxes input[tpye="checkbox"]:checked').length !== 0){
@@ -326,13 +347,20 @@ $('form').submit(function(event){
         $('form').submit(function(event){
             let zip = document.getElementById('zip').value;
         if(isNaN(zip) || zip === ""){
+
         alert('Zip code information is required for this feild.');
         return false;
+
         }else if(zip.length > 0 && zip.length < 5){
+
             alert('Zip code can not have less than 5 digits!')
+
         return false;
+
         }else if(zip.length>5){
+
         alert('Zip code can not have more than 5 digits!')
+
         return false;
         };
         });
