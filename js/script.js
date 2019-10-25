@@ -19,14 +19,27 @@ $("#title").on('click' , function(event){
 });
 
 
+const feildValidator = {
+name: null , mail: null, activities: null, 'cc-num':null, zip:null ,cvv: null 
+
+}
+
+const $selectThemeOption = $("<option> Select a design </option>")
+$("#color option").hide();
+$("#color").prepend($selectThemeOption)
+$selectThemeOption.attr("selected" , true)
+
 //Until a theme is selected from the “Design” menu, no color options appear in the
 //“Color” drop down and the “Color” field reads “Please select a T-shirt theme”
 //When a new theme is selected from the "Design" menu, the "Color" field and drop
 //down menu is updated
 //$("#colors-js-puns").hide()
-$("#design").change(function(){
+$("#design").change(function()
+{
+    if($('#design option:selected').attr("selected" , true ).text() === "Select Theme"){
+        $("#color option").hide()
 
-if($("#design option:selected").text()==="Theme - JS Puns"){
+    }else if($("#design option:selected").text()==="Theme - JS Puns"){
 
 $("#color").val("cornflowerblue").show();
 $("#color option[value='cornflowerblue']").show();
@@ -35,9 +48,6 @@ $("#color option[value='darkslategrey']").show();
 $("#color option[value='tomato']").hide();
 $("#color option[value='dimgrey']").hide();
 $("#color option[value='steelblue']").hide();
-
-   }else if($('#design').text() === "Select Theme"){
-    $("#colors-js-puns").hide();
 
    }else if($("#design option:selected").text() === "Theme - I ♥ JS"){
         $("#color").val("tomato").show();
@@ -63,14 +73,14 @@ if($(this).is(':checked')){
     $('.activities p').text("Total: $ " + totalValue);
 
     //prevent double booking between js-frameworks and express
-$('[name= "express"]').attr("disabled" , "true").parent().fadeOut()
+$('[name= "express"]').attr("disabled" , "true");
 
 
 }else{
 
 totalValue = totalValue - 100
     $('.activities p').text("Total: $ " + totalValue)
-        $('[name = "express"]').removeAttr('disabled').parent().toggle()
+        $('[name = "express"]').removeAttr('disabled')
 };
 
 });
@@ -83,16 +93,16 @@ $('input[name = "express"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 
-        $("[name = 'js-frameworks']").attr("disabled" , "true").parent().fadeOut();
-        $("[name = 'build-tools']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'js-frameworks']").attr("disabled" , "true")
+        
 
     }else{
 
         totalValue = totalValue - 100;
         $('.activities p').text("Total: $ " + totalValue)
 
-        $("[name = 'js-frameworks']").removeAttr('disabled').parent().toggle();
-        $('[name = "build-tools"]').removeAttr('disabled').parent().toggle()
+        $("[name = 'js-frameworks']").removeAttr('disabled')
+        
     };
 });
 
@@ -103,7 +113,7 @@ $('input[name = "js-libs"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
 // prevent double booking between js-libs and node
-        $("[name = 'node']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'node']").attr("disabled" , "true")
         
 
     }else{
@@ -111,7 +121,7 @@ $('input[name = "js-libs"]').on('click' , function(){
         totalValue = totalValue - 100;
         $('.activities p').text("Total: $ " + totalValue)
 
-        $("[name = 'node']").removeAttr('disabled').parent().toggle();
+        $("[name = 'node']").removeAttr('disabled')
         
     };
 
@@ -125,14 +135,13 @@ $('input[name = "node"]').on('click' , function(){
         $('.activities p').text("Total: $ " + totalValue);
 
 
-        $("[name = 'js-libs']").attr("disabled" , "true").parent().fadeOut()
-
+        $("[name = 'js-libs']").attr("disabled" , "true")
     }else{
 
         totalValue = totalValue - 100;
         $('.activities p').text("Total: $ " + totalValue)
 
-        $("[name = 'js-libs']").removeAttr('disabled').parent().toggle()
+        $("[name = 'js-libs']").removeAttr('disabled')
     };
     
 });
@@ -143,8 +152,7 @@ $('input[name = "build-tools"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
     }else{
-
-        totalValue = totalValue - 100
+         totalValue = totalValue - 100
         $('activities p').text("Total: $ " + totalValue)
     };
     
@@ -169,23 +177,22 @@ $('input[name = "build-tools"]').on('click' , function(){
                 totalValue = totalValue + 200;
                 $('.activities p').text("Total: $ " + totalValue);
 //hides everything else
-        $("[name = 'js-frameworks']").attr("disabled" , "true").parent().fadeOut();
-        $("[name = 'build-tools']").attr("disabled" , "true").parent().fadeOut();
-        $("[name = 'express']").attr("disabled" , "true").parent().fadeOut();
-        $("[name = 'js-libs']").attr("disabled" , "true").parent().fadeOut();
-        $("[name = 'node']").attr("disabled" , "true").parent().fadeOut();
-        $("[name = 'npm']").attr("disabled" , "true").parent().fadeOut();
+        $("[name = 'js-frameworks']").attr("disabled" , "true")
+        $("[name = 'build-tools']").attr("disabled" , "true")
+        $("[name = 'express']").attr("disabled" , "true")
+        $("[name = 'js-libs']").attr("disabled" , "true")
+        $("[name = 'node']").attr("disabled" , "true")
+        $("[name = 'npm']").attr("disabled" , "true")
             }else{
                 totalValue = totalValue - 200
                 $('activities p').text("Total: $ " + totalValue)
-//hides everything else
-        $("[name = 'js-frameworks']").removeAttr('disabled').parent().toggle();
-        $('[name = "build-tools"]').removeAttr('disabled').parent().toggle()
-        $("[name = 'express']").removeAttr('disabled').parent().toggle();
-        $('[name = "js-libs"]').removeAttr('disabled').parent().toggle()
-        $("[name = 'node']").removeAttr('disabled').parent().toggle();
-        $('[name = "npm"]').removeAttr('disabled').parent().toggle()
-    
+//shows everything else
+        $("[name = 'js-frameworks']").removeAttr('disabled')
+        $('[name = "build-tools"]').removeAttr('disabled')
+        $("[name = 'express']").removeAttr('disabled')
+        $('[name = "js-libs"]').removeAttr('disabled')
+        $("[name = 'node']").removeAttr('disabled')
+        $('[name = "npm"]').removeAttr('disabled')
             };
             
             });
@@ -231,66 +238,49 @@ $('.selectMethod').fadeOut()
 
 //Validate required fields and provide error indications for invalid fields upon form
 //submission
+//#6fdc73
+//valid and invalid constants as well as for activities
+function showFieldAsInvalid(selectorString) {
+    $(selectorString).css('border', '2px Maroon');
+  }
+
+  function showFieldAsValid(selectorString) {
+    $(selectorString).css('border', '2px solid #6fdc73');
+  }
+  function showActivitiesAsInvalid() {
+    $('.activities').css('color', 'red');
+  }
+  function showActivitiesAsValid() {
+    $('.activities').css('color', 'initial');
+  };
+
 //for name 
-$('form').submit(function(event){
-
-if($('input:first').val()===""){
-
-    alert('You Shall Not Pass... Without a name.')
-    return false
+function nameValidity(){
+let name = $("#name").val
+let regexForName = /^\w[\s\w-]*$/;
+let validName = regexForName.test(name)
+feildValidator.name = validName
+return validName
 };
-});
+//if valid name input
+
+
 //for email
-$('form').submit(function(event){
-
-    if($('input[name = "user_email"]').val()=== ''){
-    
-        alert('You Shall Not Pass... Without an email.')
-        return false
+function emailValidity(){
+    let email = $("#email").val
+    let regexForEmail = /^[^@]+@+\.[a-z]+$/i;
+    let validEmail = regexForEmail.test(email)
+    feildValidator.mail = validEmail
+    return validEmail
     };
-    });
+//if valid email input
 
-//regex for email so email input is valid.
 
-let emailInput = document.getElementById('email')
 
-function validEmail(email){
-
-return /^[^@]+@+\.[a-z]+$/i.test(email);
-};
-
-function tip(show, element){
-
-if(show){
-element.style.display = "inherit"
-}else{
-element.style.display = "none"
-};
-};
-
-function eventListener(validity){
-return event => {
-const valid = validity(text)
-const text = event.target.nextElementSibilings;
-const showadvice = text !== '' && !valid;
-const tool = event.target.nextElementSibilings;
-tip(showadvice , tool);
-};
-};
-
-emailInput.addEventListener("input" , createListener(validEmail));
-
-$(document).submit(function(event){
-if($('#checkBoxes input[tpye="checkbox"]:checked').length !== 0){
-alert("Good Choice!");    
-}else{
-    alert("Please register for atleast one event.")
-    return false 
-};
-});
 //credit card feild.
 
-$('form').submit(function(event){
+
+$('form').submit(function(){
 if($('input[name="user_cc-num"]').val()===''){
 
     alert('No credit card? No event.')
@@ -298,7 +288,7 @@ if($('input[name="user_cc-num"]').val()===''){
 return false
 });
 
-$('form').submit(function(event){
+$('form').submit(function(){
     let cc = document.getElementById('cc-num').value;
 if(isNaN(cc) || cc === ""){
 alert('Debit or credit card information is required to purchase the event chosen');
@@ -311,7 +301,7 @@ alert('Credit card number can not have more than 16 digits!')
 return false;
 };
 });
-// the CVV mumber
+// the CVV number
 $('form').submit(function(event){
     if($('input[name="user_cvv"]').val()===''){
     
