@@ -17,9 +17,15 @@ $("#title").on('click' , function(event){
     };
 
 });
+// regex
+//zip = /^\d{5}$/
+//cvv = /^\d{3}$/
+//cc = /^\d{13,16}$/
+//email = /^[^@]+@[^@.]+\.[a-z]+$/
+//name = /^\w[\s\w-]*$/
 
 
-const feildValidator = {
+const fieldValidator = {
 name: null , mail: null, activities: null, 'cc-num':null, zip:null ,cvv: null 
 
 }
@@ -152,8 +158,8 @@ $('input[name = "build-tools"]').on('click' , function(){
         totalValue = totalValue + 100;
         $('.activities p').text("Total: $ " + totalValue);
     }else{
-         totalValue = totalValue - 100
-        $('activities p').text("Total: $ " + totalValue)
+        totalValue = totalValue - 100;
+        $('.activities p').text("Total: $ " + totalValue)
     };
     
 });
@@ -164,8 +170,8 @@ $('input[name = "build-tools"]').on('click' , function(){
             totalValue = totalValue + 100;
             $('.activities p').text("Total: $ " + totalValue);
         }else{
-            totalValue = totalValue - 100
-            $('activities p').text("Total: $ " + totalValue)
+            totalValue = totalValue - 100;
+        $('.activities p').text("Total: $ " + totalValue)
 
         };
         
@@ -184,8 +190,8 @@ $('input[name = "build-tools"]').on('click' , function(){
         $("[name = 'node']").attr("disabled" , "true")
         $("[name = 'npm']").attr("disabled" , "true")
             }else{
-                totalValue = totalValue - 200
-                $('activities p').text("Total: $ " + totalValue)
+                totalValue = totalValue - 200;
+        $('.activities p').text("Total: $ " + totalValue)
 //shows everything else
         $("[name = 'js-frameworks']").removeAttr('disabled')
         $('[name = "build-tools"]').removeAttr('disabled')
@@ -200,7 +206,7 @@ $('input[name = "build-tools"]').on('click' , function(){
 
 //payment information section            
 $("#payment").val("credit card").show();
-$(".paypal").focus();
+//$(".paypal").focus();
 
 
 // hide senesitve banking information for paypal and bitcoin
@@ -218,140 +224,189 @@ if($('#payment option:selected').text()==='PayPal') {
 
 
 }else if ($('#payment option:selected').text()==='Credit Card') {
+    $('#credit-card').slideToggle(2000);
     $('.paypal').hide();
     $('.bitcoin').hide();
-    $('#credit-card').slideToggle(2000);
-
-
-
 }else if ($('#payment option:selected').text()==='Bitcoin') {
-    $('.paypal').hide();
     $('.bitcoin').slideToggle(1000);
+    $('.paypal').hide();
     $('#credit-card').hide();
     
 }else if ($('#payment option:selected').text()==="Select Payment Method"){
 
 $('#payment').val("credit card").show()
-$('.selectMethod').fadeOut()
+
 };
 });
 
 //Validate required fields and provide error indications for invalid fields upon form
 //submission
-//#6fdc73
+//#6fdc73 --- Green
 //valid and invalid constants as well as for activities
-function showFieldAsInvalid(selectorString) {
-    $(selectorString).css('border', '2px Maroon');
+
+function fieldIsInvalid(selectorString) {
+    $(selectorString).css('border', '2px red');
   }
 
-  function showFieldAsValid(selectorString) {
+  function fieldIsValid(selectorString) {
     $(selectorString).css('border', '2px solid #6fdc73');
   }
-  function showActivitiesAsInvalid() {
+  function activityIsInvalid() {
     $('.activities').css('color', 'red');
   }
-  function showActivitiesAsValid() {
+  function activityIsValid() {
     $('.activities').css('color', 'initial');
   };
 
 //for name 
 function nameValidity(){
-let name = $("#name").val
+let name = $("#name").val()
 let regexForName = /^\w[\s\w-]*$/;
 let validName = regexForName.test(name)
-feildValidator.name = validName
+fieldValidator.name = validName
 return validName
 };
 //if valid name input
+$("#name").keyup(function(){
+nameValidity();
+if(fieldValidator.name){
+fieldIsValid("#name");
+}
+});
 
+// if user moves past without a valid name
+$("#name").on('blur' , function(){
+if(fieldValidator.name){
+fieldIsValid("#name");
+}else{
+fieldIsInvalid("#name");
+};
+})
 
 //for email
 function emailValidity(){
-    let email = $("#email").val
-    let regexForEmail = /^[^@]+@+\.[a-z]+$/i;
-    let validEmail = regexForEmail.test(email)
-    feildValidator.mail = validEmail
+    const email = $("#mail").val()
+    const regexForEmail = /^[^@]+@+[^@.]\.[a-z]+$/i;
+    const validEmail = regexForEmail.test(email)
+    fieldValidator.mail = validEmail
     return validEmail
     };
 //if valid email input
+$("#mail").keyup(function(){
+    emailValidity();
+    if(fieldValidator.mail){
+    fieldIsValid("#mail");
+    }
+    });
+// if user moves past without valid email. 
 
 
+$("#mail").on("blur" , function(){
+if(fieldValidator.mail){
+    fieldIsValid("#mail");
+    }else{
+    fieldIsInvalid("#mail");
+    };
+    });
 
+
+    //activities field 
+    function activitiesValidation() {
+        const checked = $('.activities').length;
+       // let validActivities;
+        if (checked === 0) {
+            activityIsInvalid;
+        } else {
+            activityIsValid;
+        }
+        fieldValidator.activities = activityIsValid;
+        return activityIsValid;
+      }
+
+
+    $('.activities').change(function() {
+        activitiesValidation();
+        if (fieldValidator.activities) {
+            activityIsValid();
+        } else {
+          activityIsInvalid();
+        }
+      });
 //credit card feild.
-
-
-$('form').submit(function(){
-if($('input[name="user_cc-num"]').val()===''){
-
-    alert('No credit card? No event.')
+function creditCardValidity(){
+    let card = $("#cc-num").val()
+    let regexForCard = /^\d{13,16}$/;
+    let validCard = regexForCard.test(card)
+    fieldValidator.name = validCard
+    return validCard
+    };
+    //if valid card input
+    $("#cc-num").keyup(function(){
+    creditCardValidity();
+    if(fieldValidator.card){
+    fieldIsValid("#cc-num");
+    }else{
+    fieldIsInvalid("#cc-num");
+    };
+    });
+    
+    // if user moves past without a valid card
+    $("#cc-num").on("blur" , function(){
+    if(fieldValidator.card){
+    fieldIsValid("#cc-num");
+    }else{
+    fieldIsInvalid("#cc-num");
+    };
+    
+    })
+//cvv number field
+function cvvValidity(){
+    let cvv = $("#cvv").val
+    let regexForCvv =/^\d{3}$/; ;
+    let validCvv = regexForCvv.test(cvv)
+    fieldValidator.cvv = validCvv
+    return validCvv
+    };
+    //if valid cvv input
+    $("#cvv").keyup(function(){
+    cvvValidity();
+    if(fieldValidator.cvv){
+    fieldIsValid("#cvv");
+    }
+    });
+    // if user moves past without a valid name
+    $("#cvv").on('blur' , function(){
+    if(fieldValidator.cvv){
+    fieldIsValid("#cvv");
+    }else{
+    fieldIsInvalid("#cvv");
+    };
+    
+    })
+// upon submitting the form required fields needs changing if needed
+function ableToSubmitForm() {
+let valid =
+fieldValidator.name && fieldValidator.mail && fieldValidator.activities;
+          
+if ($('#payment option:selected').val() === 'Credit Card') {
+valid = valid && fieldValidator['cc-num'] && fieldValidator.zip && fieldValidator.cvv;
+} 
+return valid;
 }
-return false
-});
 
-$('form').submit(function(){
-    let cc = document.getElementById('cc-num').value;
-if(isNaN(cc) || cc === ""){
-alert('Debit or credit card information is required to purchase the event chosen');
-return false;
-}else if(cc.length > 0 && cc.length < 13){
-    alert('CC Number can not have less than 13 digits!')
-return false;
-}else if(cc.length>16){
-alert('Credit card number can not have more than 16 digits!')
-return false;
-};
-});
-// the CVV number
-$('form').submit(function(event){
-    if($('input[name="user_cvv"]').val()===''){
-    
-        alert('No cvv? No event.')
-    };
-    return false
-    });
-    
-    $('form').submit(function(event){
-        let cvv = document.getElementById('cvv').value;
-    if(isNaN(cvv) || cc === ""){
-    alert('Debit or credit card information is required to purchase the event chosen');
-    return false;
-    }else if(cvv.length > 0 && cvv.length < 3){
-        alert('cvv Number can not have less than 3 digits!')
-    return false;
-    }else if(cvv.length>3){
-    alert('cvv number can not have more than 3 digits!')
-    return false;
-    };
-    });
-
-//zip code
-$('form').submit(function(event){
-
-        if($('input[name="user_zip"]').val()===''){
-        
-            alert('No Zip Code? No event.')
-        };
-        return false
-        });
-        
-        $('form').submit(function(event){
-            let zip = document.getElementById('zip').value;
-        if(isNaN(zip) || zip === ""){
-
-        alert('Zip code information is required for this feild.');
-        return false;
-
-        }else if(zip.length > 0 && zip.length < 5){
-
-            alert('Zip code can not have less than 5 digits!')
-
-        return false;
-
-        }else if(zip.length>5){
-
-        alert('Zip code can not have more than 5 digits!')
-
-        return false;
-        };
-        });
-
+function failedFields() {
+for (let fieldName in fieldValidator) {
+if (fieldName === 'activities' && !fieldValidator.activities) {
+    activityIsInvalid();
+} else if (!fieldValidator[fieldName]) {
+    activityIsInvalid('#' + fieldName);
+}
+}
+}
+$('form').submit(function(e) {
+    if (!ableToSubmitForm()) {
+      e.preventDefault();
+      failedFields();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
