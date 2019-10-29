@@ -286,7 +286,7 @@ fieldIsInvalid("#name");
 //for email
 function emailValidity(){
     const email = $("#mail").val()
-    const regexForEmail = /^[^@]+@+[^@.]\.[a-z]+$/i;
+    const regexForEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const validEmail = regexForEmail.test(email)
     fieldValidator.mail = validEmail
     return validEmail
@@ -299,8 +299,6 @@ $("#mail").keyup(function(){
     }
     });
 // if user moves past without valid email. 
-
-
 $("#mail").on("blur" , function(){
 if(fieldValidator.mail){
     fieldIsValid("#mail");
@@ -335,7 +333,7 @@ if(fieldValidator.mail){
 //credit card feild.
 function creditCardValidity(){
     let card = $("#cc-num").val()
-    let regexForCard = /^\d{13,16}$/;
+    let regexForCard = /\b\d{13,16}\b/;
     let validCard = regexForCard.test(card)
     fieldValidator.name = validCard
     return validCard
@@ -357,7 +355,6 @@ function creditCardValidity(){
     }else{
     fieldIsInvalid("#cc-num");
     };
-    
     })
 //cvv number field
 function cvvValidity(){
@@ -381,7 +378,6 @@ function cvvValidity(){
     }else{
     fieldIsInvalid("#cvv");
     };
-    
     })
 // upon submitting the form required fields needs changing if needed
 function ableToSubmitForm() {
