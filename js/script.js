@@ -359,7 +359,7 @@ function creditCardValidity(){
 //cvv number field
 function cvvValidity(){
     let cvv = $("#cvv").val
-    let regexForCvv =/^\d{3}$/; ;
+    let regexForCvv =/^\d{3}$/;
     let validCvv = regexForCvv.test(cvv)
     fieldValidator.cvv = validCvv
     return validCvv
@@ -379,6 +379,31 @@ function cvvValidity(){
     fieldIsInvalid("#cvv");
     };
     })
+
+    //for zip
+function zipValidity(){
+    const zip = $("#zip").val()
+    const regexForZip =/\b\d{5}\b/;
+    const validZip = regexForZip.test(zip)
+    fieldValidator.zip = validZip
+    return validZip
+    };
+//if valid email input
+$("#zip").keyup(function(){
+    zipValidity();
+    if(fieldValidator.zip){
+    fieldIsValid("#zip");
+    }
+    });
+// if user moves past without valid email. 
+$("#zip").on("blur" , function(){
+if(fieldValidator.zip){
+    fieldIsValid("#zip");
+    }else{
+    fieldIsInvalid("#zip");
+    };
+    });
+
 // upon submitting the form required fields needs changing if needed
 function ableToSubmitForm() {
 let valid =
