@@ -222,9 +222,9 @@ function activityIsValid() {
 
 //for name
 function nameValidity() {
-  let name = $("#name").val();
-  let regexForName = /^\w[\s\w-]*$/;
-  let validName = regexForName.test(name);
+  const name = $("#name").val();
+  const regexForName = /^\w[\s\w-]*$/;
+  const validName = regexForName.test(name);
   fieldValidator.name = validName;
   return validName;
 }
@@ -298,14 +298,14 @@ function cardValidity() {
   fieldValidator["cc-num"] = validCard;
   return validCard;
 }
-//if valid email input
+//if valid credit card input
 $("#cc-num").keyup(function() {
   emailValidity();
   if (fieldValidator["cc-num"]) {
     fieldIsInvalid("#cc-num");
   }
 });
-// if user moves past without valid email.
+// if user moves past without valid card.
 $("#cc-num").on("blur", function() {
   if (fieldValidator["cc-num"]) {
     fieldIsValid("#cc-num");
@@ -369,7 +369,7 @@ function ableToSubmitForm() {
 
   if ($("#payment option:selected").val() === "Credit Card") {
      valid &&
-      fieldValidator["#cc-num"] &&
+      fieldValidator["cc-num"] &&
       fieldValidator.zip &&
       fieldValidator.cvv;
  }
